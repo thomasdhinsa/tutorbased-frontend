@@ -15,7 +15,7 @@ export default {
   },
   methods: {
     destroyReview: function () {
-      if (confirm("Are you sure you to delete this?")) {
+      if (confirm("Are you sure you want to delete this?")) {
         axios.delete(`/reviews/${this.review.id}`).then((response) => {
           console.log("Success", response.data);
           this.$router.push("/reviews");
