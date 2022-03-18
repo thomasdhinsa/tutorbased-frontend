@@ -3,7 +3,7 @@ import HomeView from "../views/HomeView.vue";
 import SignUp from "../views/SignUp.vue";
 import LogIn from "../views/LogIn.vue";
 import LogOut from "../views/LogOut.vue";
-import TeacherShow from "../views/TeacherShow.vue";
+import UsersShow from "../views/UsersShow.vue";
 import EditProfile from "../views/EditProfile.vue";
 
 const routes = [
@@ -36,9 +36,9 @@ const routes = [
     component: LogOut,
   },
   {
-    path: "/teachershow",
-    name: "teachershow",
-    component: TeacherShow,
+    path: "/users/:id",
+    name: "UsersShow",
+    component: UsersShow,
   },
   {
     path: "/editprofile",

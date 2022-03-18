@@ -9,19 +9,19 @@ export default {
     };
   },
   created: function () {
-    axios.get("/users/" + this.$route.params.id).then((response) => {
-      console.log("users show", response);
+    axios.get("/users/${this.$route.params.id}").then((response) => {
+      console.log("user to edit", response);
       this.user = response.data;
       this.editUserParams = this.user;
     });
   },
   methods: {
-    editProfile: function (user) {
+    updateProfile: function () {
       axios
-        .patch("/users/" + user.id, this.editUserParams)
+        .patch("/users/${this.user.id}", this.user)
         .then((response) => {
-          console.log("user update", response);
-          this.$router.push("/users");
+          console.log("user update:", response.data);
+          this.$router.push("/users/${user.id}");
         })
         .catch((error) => {
           console.log("user update error", error.response);
@@ -34,36 +34,37 @@ export default {
 
 <template>
   <div class="edit-profile">
-    <h1>Edit Profile</h1>
-    <form v-on:submit.prevent="editProfile(user)">
+    <form v-on:submit.prevent="updateProfile()">
+      <h1>Edit Profile</h1>
       <ul>
         <li v-for="error in errors" v-bind:key="error">{{ error }}</li>
       </ul>
       <label>Name:</label>
-      <input type="text" v-model="newUserParams.name" />
+      <input type="text" v-model="user.name" />
       <label>Email:</label>
-      <input type="email" v-model="newUserParams.email" />
+      <input type="email" v-model="user.email" />
       <label>Password:</label>
-      <input type="password" v-model="newUserParams.password" />
+      <input type="password" v-model="user.password" />
       <label>Password confirmation:</label>
-      <input type="password" v-model="newUserParams.password_confirmation" />
-      <label>Is_teacher:</label>
-      <input type="boolean" v-model="newUserParams.is_teacher" />
+      <input type="password" v-model="user.password_confirmation" />
       <label>education:</label>
-      <input v-if="is_teacher" type="text" v-model="newUserParams.education" />
+      <input v-if="is_teacher" type="text" v-model="user.education" />
       <label>zipcode:</label>
-      <input v-if="is_teacher" type="text" v-model="newUserParams.zipcode" />
+      <input v-if="!is_teacher" type="text" v-model="user.zipcode" />
       <label>bio:</label>
-      <input v-if="is_teacher" type="text" v-model="newUserParams.bio" />
+      <input v-if="!is_teacher" type="text" v-model="user.bio" />
       <label>Subject(s):</label>
-      <input v-if="is_teacher" type="text" v-model="newUserParams.subjects" />
+      <input v-if="!is_teacher" type="text" v-model="user.subjects" />
       <label>preferred_contact:</label>
-      <input v-if="is_teacher" type="text" v-model="newUserParams.preferred_contact" />
+      <input v-if="!is_teacher" type="text" v-model="user.preferred_contact" />
       <label>image_url:</label>
-      <input type="text" v-model="newUserParams.image_url" />
+      <input type="text" v-model="user.image_url" />
+
+      <input type="submit" value="Update" />
     </form>
   </div>
   <img v-bind:src="user.image_url" alt="" />
+
   <router-link v-bind:to="`/users/${user.id}/edit`">Edit Profile</router-link>
-  <router-link to="/users">Back to all users</router-link>
+  <router-link to="/">Back to all users</router-link>
 </template>

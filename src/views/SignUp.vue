@@ -48,32 +48,9 @@ export default {
         <input type="password" v-model="newUserParams.password_confirmation" />
       </div>
       <div>
-        <label>Is_teacher:</label>
-        <input type="boolean" v-model="newUserParams.is_teacher" />
-      </div>
-      <div>
-        <label>education:</label>
-        <input v-if="is_teacher" type="text" v-model="newUserParams.education" />
-      </div>
-      <div>
-        <label>zipcode:</label>
-        <input type="text" v-model="newUserParams.zipcode" />
-      </div>
-      <div>
-        <label>bio:</label>
-        <input type="text" v-model="newUserParams.bio" />
-      </div>
-      <div>
-        <label>Subject(s):</label>
-        <input type="text" v-model="newUserParams.subjects" />
-      </div>
-      <div>
-        <label>preferred_contact:</label>
-        <input type="text" v-model="newUserParams.preferred_contact" />
-      </div>
-      <div>
-        <label>image_url:</label>
-        <input type="text" v-model="newUserParams.image_url" />
+        <label>Are You A Teacher?</label>
+        <input type="checkbox" id="checkbox" v-model="newUserParams.is_teacher" />
+        <label for="checkbox">{{ checked }}</label>
       </div>
       <input type="submit" value="Submit" />
     </form>
