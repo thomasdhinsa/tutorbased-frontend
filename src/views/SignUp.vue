@@ -53,7 +53,7 @@ export default {
       </div>
       <div>
         <label>education:</label>
-        <input type="text" v-model="newUserParams.education" />
+        <input v-if="is_teacher" type="text" v-model="newUserParams.education" />
       </div>
       <div>
         <label>zipcode:</label>
