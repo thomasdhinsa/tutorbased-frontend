@@ -11,6 +11,8 @@
     <router-link to="/logout">Logout</router-link>
     |
     <router-link to="/teachershow">Search For A Teacher</router-link>
+    |
+    <router-link to="/editprofile">Edit Profile</router-link>
   </nav>
   <router-view />
 </template>

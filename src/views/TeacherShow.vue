@@ -4,7 +4,7 @@ export default {
   data: function () {
     return {
       teacher: {},
-      // currentUserId: localStorage.user_id
+      // currentUserId: localStorage.user_id (this is for the search method)
     };
   },
   created: function () {

@@ -4,6 +4,7 @@ import SignUp from "../views/SignUp.vue";
 import LogIn from "../views/LogIn.vue";
 import LogOut from "../views/LogOut.vue";
 import TeacherShow from "../views/TeacherShow.vue";
+import EditProfile from "../views/TeacherShow.vue";
 
 const routes = [
   {
@@ -35,9 +36,14 @@ const routes = [
     component: LogOut,
   },
   {
-    path: "/teachershow",
+    path: "/teachershow/:id",
     name: "teachershow",
     component: TeacherShow,
+  },
+  {
+    path: "/editprofile/:id",
+    name: "editprofile",
+    component: EditProfile,
   },
 ];
 

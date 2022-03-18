@@ -3,34 +3,34 @@ import axios from "axios";
 export default {
   data: function () {
     return {
-      message: "Welcome to Vue.js!",
-      teachers: [],
+      users: [],
     };
   },
   mounted: function () {
-    this.indexTeachers();
+    axios.get("/users").then((response) => {
+      console.log("Teachers Index:", response.data);
+      this.users = response.data;
+    });
   },
-
   methods: {
     indexTeachers: function () {
-      axios.get("/users").then((response) => {
+      console.log("This is the teachers array");
+      axios.get("http://localhost:3000/users").then((response) => {
         console.log("teachers index", response);
-        this.teachers = response.data;
+        this.users = response.data;
       });
     },
   },
 };
 </script>
-
 <template>
-  <div class="home">
+  <div class="teachers-index">
     <h1>Here Are Some Of The Great Teachers</h1>
-    <button v-on:click="indexTeachers()">Load Teachers</button>
-    <div v-for="user in users" v-bind:key="user.teacher_id">
+    <div v-for="user in users" v-bind:key="user.id">
+      <img v-bind:src="user.image_url" alt="" />
       <h2>{{ user.name }}</h2>
-      <img v-bind:src="user.image_url" v-bind:alt="user.name" />
+      <h3>{{ user.bio }}</h3>
     </div>
   </div>
 </template>
-
 <style></style>
