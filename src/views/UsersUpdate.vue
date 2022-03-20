@@ -40,25 +40,25 @@ export default {
         <li v-for="error in errors" v-bind:key="error">{{ error }}</li>
       </ul>
       <label>Name:</label>
-      <input type="text" v-model="user.name" />
+      <input type="text" v-model="editUserParams.name" />
       <label>Email:</label>
-      <input type="email" v-model="user.email" />
+      <input type="email" v-model="editUserParams.email" />
       <label>Password:</label>
-      <input type="password" v-model="user.password" />
+      <input type="password" v-model="editUserParams.password" />
       <label>Password confirmation:</label>
-      <input type="password" v-model="user.password_confirmation" />
+      <input type="password" v-model="editUserParams.password_confirmation" />
       <label>education:</label>
-      <input v-if="is_teacher" type="text" v-model="user.education" />
+      <input v-if="user.is_teacher === true" type="text" v-model="editUserParams.education" />
       <label>zipcode:</label>
-      <input v-if="!is_teacher" type="text" v-model="user.zipcode" />
+      <input v-if="!user.is_teacher" type="text" v-model="editUserParams.zipcode" />
       <label>bio:</label>
-      <input v-if="!is_teacher" type="text" v-model="user.bio" />
+      <input v-if="!user.is_teacher" type="text" v-model="editUserParams.bio" />
       <label>Subject(s):</label>
-      <input v-if="!is_teacher" type="text" v-model="user.subjects" />
+      <input v-if="!user.is_teacher" type="text" v-model="editUserParams.subjects" />
       <label>preferred_contact:</label>
-      <input v-if="!is_teacher" type="text" v-model="user.preferred_contact" />
+      <input v-if="!user.is_teacher" type="text" v-model="editUserParams.preferred_contact" />
       <label>image_url:</label>
-      <input type="text" v-model="user.image_url" />
+      <input type="text" v-model="editUserParams.image_url" />
 
       <input type="submit" value="Update" />
     </form>

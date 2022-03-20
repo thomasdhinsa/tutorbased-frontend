@@ -4,7 +4,7 @@ import SignUp from "../views/SignUp.vue";
 import LogIn from "../views/LogIn.vue";
 import LogOut from "../views/LogOut.vue";
 import UsersShow from "../views/UsersShow.vue";
-import EditProfile from "../views/EditProfile.vue";
+import UsersUpdate from "../views/UsersUpdate.vue";
 
 const routes = [
   {
@@ -41,9 +41,9 @@ const routes = [
     component: UsersShow,
   },
   {
-    path: "/editprofile",
-    name: "editprofile",
-    component: EditProfile,
+    path: "/users/:id/edit",
+    name: "UsersUpdate",
+    component: UsersUpdate,
   },
 ];
 

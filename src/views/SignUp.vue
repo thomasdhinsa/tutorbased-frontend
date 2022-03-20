@@ -50,7 +50,7 @@ export default {
       <div>
         <label>Are You A Teacher?</label>
         <input type="checkbox" id="checkbox" v-model="newUserParams.is_teacher" />
-        <label for="checkbox">{{ checked }}</label>
+        <label for="checkbox"></label>
       </div>
       <input type="submit" value="Submit" />
     </form>
