@@ -4,7 +4,8 @@ export default {
   data: function () {
     return {
       user: {},
-      editReviewParams: {},
+      newReviewParams: {},
+      errors: [],
     };
   },
   created: function () {
@@ -13,31 +14,19 @@ export default {
       this.user = response.data;
     });
   },
-  submit: function () {
-    axios.get("/reviews/${this.$route.params.id}").then((response) => {
-      console.log("review to update", response);
-      this.review = response.data;
-      this.editReviewParams = this.review;
-    });
-  },
   methods: {
     createReview: function () {
-      console.log("Time to make a review");
-      axios.post("http://localhost:3000/reviews").then((response) => {
-        console.log("The review has been created", response);
-        this.users = response.data;
-      });
-    },
-    updateReview: function () {
+      this.newReviewParams.teacher_id = this.user.id;
+      console.log(this.newReviewParams);
       axios
-        .patch("/reviews/${this.review.id}", this.review)
+        .post("/reviews", this.newReviewParams)
         .then((response) => {
-          console.log("review update:", response.data);
-          this.$router.push("/reviews/${review.id}");
+          console.log(response.data);
+          this.user.earned_reviews.push(response.data);
         })
         .catch((error) => {
-          console.log("review update error", error.response);
           this.errors = error.response.data.errors;
+          console.log(this.errors);
         });
     },
   },
@@ -57,9 +46,9 @@ export default {
         <li v-for="error in errors" v-bind:key="error">{{ error }}</li>
       </ul>
       <label>Rating:</label>
-      <input type="integer" v-model="review.rating" required />
+      <input type="integer" v-model="newReviewParams.rating" required />
       <label>Body:</label>
-      <input type="text" v-model="review.body" required />
+      <input type="text" v-model="newReviewParams.body" required />
       <input type="submit" value="Create" />
     </form>
     <div v-for="review in user.earned_reviews" v-bind:key="review.id">

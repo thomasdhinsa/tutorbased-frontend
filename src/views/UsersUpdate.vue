@@ -35,7 +35,7 @@ export default {
 <template>
   <div class="edit-profile">
     <form v-on:submit.prevent="updateProfile()">
-      <h1>Edit Profile</h1>
+      <h1>Update Profile</h1>
       <ul>
         <li v-for="error in errors" v-bind:key="error">{{ error }}</li>
       </ul>
@@ -48,15 +48,15 @@ export default {
       <label>Password confirmation:</label>
       <input type="password" v-model="editUserParams.password_confirmation" />
       <label>education:</label>
-      <input v-if="user.is_teacher === true" type="text" v-model="editUserParams.education" />
+      <input v-if="is_teacher" type="text" v-model="editUserParams.education" />
       <label>zipcode:</label>
-      <input v-if="!user.is_teacher" type="text" v-model="editUserParams.zipcode" />
+      <input v-if="is_teacher" type="text" v-model="editUserParams.zipcode" />
       <label>bio:</label>
-      <input v-if="!user.is_teacher" type="text" v-model="editUserParams.bio" />
+      <input v-if="is_teacher" type="text" v-model="editUserParams.bio" />
       <label>Subject(s):</label>
-      <input v-if="!user.is_teacher" type="text" v-model="editUserParams.subjects" />
+      <input v-if="is_teacher" type="text" v-model="editUserParams.subjects" />
       <label>preferred_contact:</label>
-      <input v-if="!user.is_teacher" type="text" v-model="editUserParams.preferred_contact" />
+      <input v-if="is_teacher" type="text" v-model="editUserParams.preferred_contact" />
       <label>image_url:</label>
       <input type="text" v-model="editUserParams.image_url" />
 
