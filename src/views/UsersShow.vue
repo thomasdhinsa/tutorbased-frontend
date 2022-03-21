@@ -1,6 +1,6 @@
 <script>
 import axios from "axios";
-// import SavedModal from "../components/SavedModal.vue";
+// import SavedModal from "./components/SavedModal.vue";
 export default {
   // components: { SavedModal },
   data: function () {
@@ -9,6 +9,7 @@ export default {
       newReviewParams: {},
       editReviewParams: {},
       errors: [],
+      userId: localStorage.user_id,
       // showModal: false,
     };
   },
@@ -36,16 +37,15 @@ export default {
     showReview: function (review) {
       console.log(review);
       this.currentReview = review;
-      document.querySelector("#review-body").showModal();
     },
-    updateReview: function () {
-      this.editReviewParams.review = this.user.id;
-      // do I need another parameter to make sure that the correct user is editing their review?
+    updateReview: function (review) {
+      this.editReviewParams.user_id = this.userId;
       console.log(this.editReviewParams);
       axios
-        .patch("/reviews", this.editReviewParams)
+        .patch(`/reviews/${review.id}`, this.editReviewParams)
         .then((response) => {
-          console.log(response.data, "the button works?");
+          console.log(response.data, "Review updated");
+          this.$router.go();
         })
         .catch((error) => {
           this.errors = error.response.data.errors;
@@ -75,16 +75,50 @@ export default {
     </form>
     <div v-for="review in user.earned_reviews" v-bind:key="review.id">
       <p>{{ review.body }}</p>
-      <p>{{ review.rating }}</p>
-      <button v-on:click="showReview(review)">Edit Review</button>
-      <!-- <h1>here's the modal</h1>
-      <SavedModal />
+      <p>Rating: {{ review.rating }}</p>
+      <button
+        v-on:click="editReviewParams.id = review.id"
+        v-if="userId == review.user_id"
+        type="button"
+        class="btn btn-primary"
+        data-bs-toggle="modal"
+        data-bs-target="#editReviewModal"
+      ></button>
+      <!-- <p>{{ userId }}</p>
+      <p>{{ review.user_id }}</p> -->
     </div>
-    <SavedModal v-show="showModal" />
-    <div class="save-btn">
-      <button @click="showModal = true">Save</button> -->
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="editReviewModal"
+      tabindex="-1"
+      aria-labelledby="editReviewModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="editReviewModalLabel">Edit Review</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form v-on:submit.prevent="updateReview(editReviewParams)">
+              <ul>
+                <li v-for="error in errors" v-bind:key="error">{{ error }}</li>
+              </ul>
+              <div>
+                <label>Rating:</label>
+                <input type="text" v-model="editReviewParams.rating" />
+              </div>
+              <div>
+                <label>Body:</label>
+                <input type="text" v-model="editReviewParams.body" />
+              </div>
+              <input class="btn btn-primary" type="submit" value="Update" />
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
-
-    <!-- <SavedModal v-show="showModal" @close-modal="showModal = false" /> -->
   </div>
 </template>
