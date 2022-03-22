@@ -9,7 +9,7 @@ export default {
     };
   },
   created: function () {
-    axios.get("/users/${this.$route.params.id}").then((response) => {
+    axios.get(`/users/${this.$route.params.id}`).then((response) => {
       console.log("user to edit", response);
       this.user = response.data;
       this.editUserParams = this.user;
@@ -18,7 +18,7 @@ export default {
   methods: {
     updateProfile: function () {
       axios
-        .patch("/users/${this.user.id}", this.user)
+        .patch(`/users/${this.user.id}`, this.user)
         .then((response) => {
           console.log("user update:", response.data);
           this.$router.push("/users/${user.id}");
@@ -48,15 +48,15 @@ export default {
       <label>Password confirmation:</label>
       <input type="password" v-model="editUserParams.password_confirmation" />
       <label>education:</label>
-      <input v-if="user.is_teacher" type="text" v-model="editUserParams.education" />
+      <input v-if="user.is_teacher == true" type="text" v-model="editUserParams.education" />
       <label>zipcode:</label>
-      <input v-if="user.is_teacher" type="text" v-model="editUserParams.zipcode" />
+      <input v-if="user.is_teacher == true" type="text" v-model="editUserParams.zipcode" />
       <label>bio:</label>
-      <input v-if="user.is_teacher" type="text" v-model="editUserParams.bio" />
+      <input v-if="user.is_teacher == true" type="text" v-model="editUserParams.bio" />
       <label>Subject(s):</label>
-      <input v-if="user.is_teacher" type="text" v-model="editUserParams.subjects" />
+      <input v-if="user.is_teacher == true" type="text" v-model="editUserParams.subjects" />
       <label>preferred_contact:</label>
-      <input v-if="user.is_teacher" type="text" v-model="editUserParams.preferred_contact" />
+      <input v-if="user.is_teacher == true" type="text" v-model="editUserParams.preferred_contact" />
       <label>image_url:</label>
       <input type="text" v-model="editUserParams.image_url" />
 
