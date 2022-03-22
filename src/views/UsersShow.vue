@@ -60,8 +60,11 @@ export default {
   <div class="users-show">
     <h1>{{ user.name }}</h1>
     <img v-bind:src="user.image_url" alt="" />
-    <h2>{{ user.education }}</h2>
-    <h3>{{ user.bio }}</h3>
+    <h2>Education: {{ user.education }}</h2>
+    <h3>A Little Something About Me: {{ user.bio }}</h3>
+    <h4>The Subjects I Specialize In: {{ user.subjects }}</h4>
+    <h4>Preferred Contact Options: {{ user.preferred_contact }}</h4>
+    <h4>My Area of Common Operation: {{ user.zipcode }}</h4>
     <form v-on:submit.prevent="createReview()">
       <h1>Create Review</h1>
       <ul>

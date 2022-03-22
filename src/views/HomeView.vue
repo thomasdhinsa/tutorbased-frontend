@@ -5,6 +5,7 @@ export default {
     return {
       users: [],
       search: "",
+      currentTeacher: 1,
     };
   },
   mounted: function () {
@@ -21,6 +22,9 @@ export default {
         this.users = response.data;
       });
     },
+    // currentTeacher: function () {
+    //   this.currentTeacher.user_id = this.);
+    // },
   },
   computed: {
     filteredUsers: function () {
@@ -36,9 +40,10 @@ export default {
     <h1>Here Are Some Of The Great Teachers</h1>
     <input type="text" v-model="search" placeholder="Search by Subject" />
     <div v-for="user in filteredUsers" v-bind:key="user.id">
-      <a class="text-link" href="/users/${this.$route.params.id}">Click HERE to go to this Teacher's Page</a>
+      <router-link :to="`/users/${user.id}`">Click Here to go to This Teacher's Page</router-link>
       <img v-bind:src="user.image_url" alt="" />
       <h2>{{ user.name }}</h2>
+      <h3>{{ user.subjects }}</h3>
       <h3>{{ user.bio }}</h3>
     </div>
   </div>
