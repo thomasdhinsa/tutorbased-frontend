@@ -84,6 +84,7 @@ export default {
         data-bs-toggle="modal"
         data-bs-target="#editReviewModal"
       ></button>
+      <p>Press Button(if available) to Edit Review</p>
       <!-- <p>{{ userId }}</p>
       <p>{{ review.user_id }}</p> -->
     </div>

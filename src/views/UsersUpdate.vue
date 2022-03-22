@@ -48,15 +48,15 @@ export default {
       <label>Password confirmation:</label>
       <input type="password" v-model="editUserParams.password_confirmation" />
       <label>education:</label>
-      <input v-if="is_teacher" type="text" v-model="editUserParams.education" />
+      <input v-if="user.is_teacher" type="text" v-model="editUserParams.education" />
       <label>zipcode:</label>
-      <input v-if="is_teacher" type="text" v-model="editUserParams.zipcode" />
+      <input v-if="user.is_teacher" type="text" v-model="editUserParams.zipcode" />
       <label>bio:</label>
-      <input v-if="is_teacher" type="text" v-model="editUserParams.bio" />
+      <input v-if="user.is_teacher" type="text" v-model="editUserParams.bio" />
       <label>Subject(s):</label>
-      <input v-if="is_teacher" type="text" v-model="editUserParams.subjects" />
+      <input v-if="user.is_teacher" type="text" v-model="editUserParams.subjects" />
       <label>preferred_contact:</label>
-      <input v-if="is_teacher" type="text" v-model="editUserParams.preferred_contact" />
+      <input v-if="user.is_teacher" type="text" v-model="editUserParams.preferred_contact" />
       <label>image_url:</label>
       <input type="text" v-model="editUserParams.image_url" />
 
