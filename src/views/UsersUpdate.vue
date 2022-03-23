@@ -4,6 +4,7 @@ export default {
   data: function () {
     return {
       user: {},
+      current_user_id: localStorage.getItem("user_id"),
       editUserParams: {},
       errors: [],
     };
@@ -16,12 +17,23 @@ export default {
     });
   },
   methods: {
+    destroyProfile: function () {
+      if (confirm("Would you like to delete your account?")) {
+        axios.delete(`/users/${this.user.id}`).then((response) => {
+          console.log("User deleted", response.data);
+          localStorage.removeItem("jwt");
+          localStorage.removeItem("user_id");
+          localStorage.setItem("flashMessage", "User successfully deleted");
+          this.$router.push("/");
+        });
+      }
+    },
     updateProfile: function () {
       axios
         .patch(`/users/${this.user.id}`, this.user)
         .then((response) => {
           console.log("user update:", response.data);
-          this.$router.push("/users/${user.id}");
+          this.$router.push(`/users/${this.user.id}`);
         })
         .catch((error) => {
           console.log("user update error", error.response);
@@ -40,23 +52,23 @@ export default {
         <li v-for="error in errors" v-bind:key="error">{{ error }}</li>
       </ul>
       <label>Name:</label>
-      <input type="text" v-model="editUserParams.name" />
+      <input v-if="current_user_id == user.id" type="text" v-model="editUserParams.name" />
       <label>Email:</label>
-      <input type="email" v-model="editUserParams.email" />
+      <input v-if="current_user_id == user.id" type="email" v-model="editUserParams.email" />
       <label>Password:</label>
-      <input type="password" v-model="editUserParams.password" />
+      <input v-if="current_user_id == user.id" type="password" v-model="editUserParams.password" />
       <label>Password confirmation:</label>
-      <input type="password" v-model="editUserParams.password_confirmation" />
+      <input v-if="current_user_id == user.id" type="password" v-model="editUserParams.password_confirmation" />
       <label>education:</label>
-      <input v-if="user.is_teacher" type="text" v-model="editUserParams.education" />
+      <input type="text" v-model="editUserParams.education" />
       <label>zipcode:</label>
-      <input v-if="user.is_teacher" type="text" v-model="editUserParams.zipcode" />
+      <input v-if="user.is_teacher === true" type="text" v-model="editUserParams.zipcode" />
       <label>bio:</label>
-      <input v-if="user.is_teacher" type="text" v-model="editUserParams.bio" />
+      <input v-if="user.is_teacher === true" type="text" v-model="editUserParams.bio" />
       <label>Subject(s):</label>
-      <input v-if="user.is_teacher" type="text" v-model="editUserParams.subjects" />
+      <input v-if="user.is_teacher === true" type="text" v-model="editUserParams.subjects" />
       <label>preferred_contact:</label>
-      <input v-if="user.is_teacher" type="text" v-model="editUserParams.preferred_contact" />
+      <input v-if="user.is_teacher === true" type="text" v-model="editUserParams.preferred_contact" />
       <label>image_url:</label>
       <input type="text" v-model="editUserParams.image_url" />
 

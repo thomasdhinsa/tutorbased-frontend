@@ -11,6 +11,7 @@ export default {
       this.isLoggedIn = !!localStorage.jwt;
       this.flashMessage = localStorage.flashMessage;
       localStorage.removeItem("flashMessage");
+      this.current_user_id = localStorage.getItem("user_id");
     },
   },
 };

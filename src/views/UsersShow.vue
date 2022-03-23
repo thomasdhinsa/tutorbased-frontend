@@ -52,6 +52,13 @@ export default {
           console.log(this.errors);
         });
     },
+    destroyReview: function () {
+      if (confirm("Would you like to delete this review?")) {
+        axios.delete(`/reviews/${this.reviews.id}`).then((response) => {
+          console.log("review deleted", response.data);
+        });
+      }
+    },
   },
 };
 </script>
@@ -119,6 +126,7 @@ export default {
                 <input type="text" v-model="editReviewParams.body" />
               </div>
               <input class="btn btn-primary" type="submit" value="Update" />
+              <button v-on:click="deleteReview()"></button>
             </form>
           </div>
         </div>
