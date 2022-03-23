@@ -4,22 +4,22 @@ export default {
   data: function () {
     return {
       user: {},
-      current_user_id: localStorage.getItem("user_id"),
+      currentUserId: localStorage.getItem("user_id"),
       editUserParams: {},
       errors: [],
     };
   },
   created: function () {
-    axios.get(`/users/${this.$route.params.id}`).then((response) => {
+    axios.get(`/users/${this.currentUserId}`).then((response) => {
       console.log("user to edit", response);
       this.user = response.data;
       this.editUserParams = this.user;
     });
   },
   methods: {
-    destroyProfile: function () {
+    destroyProfile: function (user) {
       if (confirm("Would you like to delete your account?")) {
-        axios.delete(`/users/${this.user.id}`).then((response) => {
+        axios.delete(`/users/${user.id}`).then((response) => {
           console.log("User deleted", response.data);
           localStorage.removeItem("jwt");
           localStorage.removeItem("user_id");
@@ -33,7 +33,8 @@ export default {
         .patch(`/users/${this.user.id}`, this.user)
         .then((response) => {
           console.log("user update:", response.data);
-          this.$router.push(`/users/${this.user.id}`);
+          localStorage.setItem("flashMessage", "User Successfully Updated");
+          this.$router.push("/");
         })
         .catch((error) => {
           console.log("user update error", error.response);
@@ -52,23 +53,23 @@ export default {
         <li v-for="error in errors" v-bind:key="error">{{ error }}</li>
       </ul>
       <label>Name:</label>
-      <input v-if="current_user_id == user.id" type="text" v-model="editUserParams.name" />
+      <input type="text" v-model="user.name" />
       <label>Email:</label>
-      <input v-if="current_user_id == user.id" type="email" v-model="editUserParams.email" />
+      <input type="email" v-model="user.email" />
       <label>Password:</label>
-      <input v-if="current_user_id == user.id" type="password" v-model="editUserParams.password" />
+      <input type="password" v-model="user.password" />
       <label>Password confirmation:</label>
-      <input v-if="current_user_id == user.id" type="password" v-model="editUserParams.password_confirmation" />
+      <input type="password" v-model="user.password_confirmation" />
       <label>education:</label>
-      <input type="text" v-model="editUserParams.education" />
+      <input v-if="user.is_teacher === true" type="text" v-model="user.education" />
       <label>zipcode:</label>
-      <input v-if="user.is_teacher === true" type="text" v-model="editUserParams.zipcode" />
+      <input v-if="user.is_teacher === true" type="text" v-model="user.zipcode" />
       <label>bio:</label>
-      <input v-if="user.is_teacher === true" type="text" v-model="editUserParams.bio" />
+      <input v-if="user.is_teacher === true" type="text" v-model="user.bio" />
       <label>Subject(s):</label>
-      <input v-if="user.is_teacher === true" type="text" v-model="editUserParams.subjects" />
+      <input v-if="user.is_teacher === true" type="text" v-model="user.subjects" />
       <label>preferred_contact:</label>
-      <input v-if="user.is_teacher === true" type="text" v-model="editUserParams.preferred_contact" />
+      <input v-if="user.is_teacher === true" type="text" v-model="user.preferred_contact" />
       <label>image_url:</label>
       <input type="text" v-model="editUserParams.image_url" />
 
@@ -76,7 +77,7 @@ export default {
     </form>
   </div>
   <img v-bind:src="user.image_url" alt="" />
-
+  <button v-on:click="destroyProfile(user)" v-if="currentUserId == user.id">Delete Profile</button>
   <router-link v-bind:to="`/users/${user.id}/edit`">Edit Profile</router-link>
   <router-link to="/">Back to all users</router-link>
 </template>

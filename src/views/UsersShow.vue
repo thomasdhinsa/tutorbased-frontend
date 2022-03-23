@@ -52,9 +52,9 @@ export default {
           console.log(this.errors);
         });
     },
-    destroyReview: function () {
+    destroyReview: function (review) {
       if (confirm("Would you like to delete this review?")) {
-        axios.delete(`/reviews/${this.reviews.id}`).then((response) => {
+        axios.delete(`/reviews/${review.id}`).then((response) => {
           console.log("review deleted", response.data);
         });
       }
@@ -94,7 +94,8 @@ export default {
         data-bs-toggle="modal"
         data-bs-target="#editReviewModal"
       ></button>
-      <p>Press Button(if available) to Edit Review</p>
+      <button v-on:click="destroyReview(review)" v-if="userId == review.user_id">Delete Review</button>
+      <p>Press Blue Button(if available) to Edit Review</p>
       <!-- <p>{{ userId }}</p>
       <p>{{ review.user_id }}</p> -->
     </div>
@@ -126,7 +127,6 @@ export default {
                 <input type="text" v-model="editReviewParams.body" />
               </div>
               <input class="btn btn-primary" type="submit" value="Update" />
-              <button v-on:click="deleteReview()"></button>
             </form>
           </div>
         </div>

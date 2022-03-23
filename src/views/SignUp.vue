@@ -48,7 +48,7 @@ export default {
         <input type="password" v-model="newUserParams.password_confirmation" />
       </div>
       <div>
-        <label>Are You A Teacher?</label>
+        <label>Are You A Teacher? (If Yes, Please Update Your Profile Directly After Signup)</label>
         <input type="checkbox" id="checkbox" v-model="newUserParams.is_teacher" />
         <label for="checkbox"></label>
       </div>

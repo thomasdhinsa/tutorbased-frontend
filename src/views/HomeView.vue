@@ -22,9 +22,6 @@ export default {
         this.users = response.data;
       });
     },
-    // currentTeacher: function () {
-    //   this.currentTeacher.user_id = this.);
-    // },
   },
   computed: {
     filteredUsers: function () {
