@@ -6,6 +6,7 @@ export default {
       users: [],
       search: "",
       currentTeacher: 1,
+      currentUserId: localStorage.getItem("user_id"),
     };
   },
   mounted: function () {
@@ -34,25 +35,35 @@ export default {
 </script>
 <template>
   <div class="teachers-index">
+    <div class="card bg-white text-black" style="width: 550px">
+      <img
+        src="https://media.istockphoto.com/photos/youre-the-best-teacher-picture-id1292825155?b=1&k=20&m=1292825155&s=170667a&w=0&h=5anTV1R9uXAkSokFjpSAtERuOKfCLWOOdpo2c8-Tzy0="
+        class="card-img"
+        alt=""
+      />
+      <div class="card-img-overlay">
+        <h5 class="card-title">Welcome</h5>
+        <p class="card-text">To</p>
+        <p class="card-text">TUTORBASED</p>
+      </div>
+    </div>
     <h1>Here Are Some Of The Great Teachers</h1>
     <input type="text" v-model="search" placeholder="Search by Subject" />
     <div v-for="user in filteredUsers" v-bind:key="user.id">
-      <router-link :to="`/users/${user.id}`">Click Here to go to This Teacher's Page</router-link>
-      <img v-bind:src="user.image_url" alt="" />
-      <h2>{{ user.name }}</h2>
-      <h3>{{ user.subjects }}</h3>
-      <h3>{{ user.bio }}</h3>
+      <div class="card" style="max-width: 540px">
+        <img v-bind:src="user.image_url" class="card-img-top" alt="" />
+        <div class="card-body">
+          <h5 class="card-title">{{ user.name }}</h5>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">{{ user.subjects }}</li>
+          <li class="list-group-item">{{ user.bio }}</li>
+        </ul>
+        <div class="card-body">
+          <router-link :to="`/users/${user.id}`" class="card-link">Click here to go to my page</router-link>
+        </div>
+      </div>
     </div>
   </div>
 </template>
-<style>
-.text-link,
-.text-link:active,
-.text-link:focus,
-.text-link:hover,
-.text-link:visited {
-  color: black;
-  text-decoration: none;
-  cursor: default;
-}
-</style>
+<style></style>

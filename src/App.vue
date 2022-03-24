@@ -20,7 +20,7 @@ export default {
   <nav>
     <router-link to="/">Home</router-link>
     |
-    <router-link to="/about">About</router-link>
+    <router-link to="/about"></router-link>
     |
     <router-link v-if="!isLoggedIn" to="/signup">Signup</router-link>
     |
