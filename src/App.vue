@@ -17,18 +17,49 @@ export default {
 };
 </script>
 <template>
-  <nav>
-    <router-link to="/">Home</router-link>
-    |
-    <router-link to="/about"></router-link>
-    |
-    <router-link v-if="!isLoggedIn" to="/signup">Signup</router-link>
-    |
-    <router-link v-if="!isLoggedIn" to="/login">Login</router-link>
-    |
-    <router-link v-if="isLoggedIn" to="/logout">Logout</router-link>
-    |
-    <router-link v-if="isLoggedIn" to="/users/:id/edit">Update Profile</router-link>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">TutorBased</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a v-if="!isLoggedIn" class="nav-link" href="/signup">Signup</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="navbarDropdown"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Login/Update Profile
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a v-if="!isLoggedIn" class="dropdown-item" href="/login">Login</a></li>
+              <li><a v-if="isLoggedIn" class="dropdown-item" href="/users/:id/edit">Update Profile</a></li>
+              <li><hr class="dropdown-divider" /></li>
+              <li><a v-if="isLoggedIn" class="dropdown-item" href="/logout">Logout</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
   </nav>
   <router-view />
 </template>
