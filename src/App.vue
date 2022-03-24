@@ -37,7 +37,7 @@ export default {
             <a class="nav-link active" aria-current="page" href="/">Home</a>
           </li>
           <li class="nav-item">
-            <a v-if="!isLoggedIn" class="nav-link" href="/signup">Signup</a>
+            <a v-if="isLoggedIn" class="nav-link" href="/signup">Signup</a>
           </li>
           <li class="nav-item dropdown">
             <a
