@@ -35,7 +35,7 @@ export default {
 </script>
 <template>
   <div class="teachers-index">
-    <div class="card bg-white text-black" style="width: 550px">
+    <div class="card bg-white text-black" style="width: 950px">
       <img
         src="https://media.istockphoto.com/photos/youre-the-best-teacher-picture-id1292825155?b=1&k=20&m=1292825155&s=170667a&w=0&h=5anTV1R9uXAkSokFjpSAtERuOKfCLWOOdpo2c8-Tzy0="
         class="card-img"
@@ -56,8 +56,8 @@ export default {
           <h5 class="card-title">{{ user.name }}</h5>
         </div>
         <ul class="list-group list-group-flush">
-          <li class="list-group-item">{{ user.subjects }}</li>
-          <li class="list-group-item">{{ user.bio }}</li>
+          <li class="list-group-item">Specializations: {{ user.subjects }}</li>
+          <li class="list-group-item">About Me: {{ user.bio }}</li>
         </ul>
         <div class="card-body">
           <router-link :to="`/users/${user.id}`" class="card-link">Click here to go to my page</router-link>

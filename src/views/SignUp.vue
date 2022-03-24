@@ -25,7 +25,7 @@ export default {
 </script>
 
 <template>
-  <div class="card bg-white text-black" style="width: 550px">
+  <div class="card bg-white text-black" style="width: 950px">
     <img
       src="https://media.istockphoto.com/photos/youre-the-best-teacher-picture-id1292825155?b=1&k=20&m=1292825155&s=170667a&w=0&h=5anTV1R9uXAkSokFjpSAtERuOKfCLWOOdpo2c8-Tzy0="
       class="card-img"
