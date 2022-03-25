@@ -35,7 +35,7 @@ export default {
 </script>
 <template>
   <div class="teachers-index">
-    <div class="card bg-white text-black" style="width: 50%">
+    <div class="card bg-white text-white" style="width: 50%">
       <img
         src="https://media.istockphoto.com/photos/youre-the-best-teacher-picture-id1292825155?b=1&k=20&m=1292825155&s=170667a&w=0&h=5anTV1R9uXAkSokFjpSAtERuOKfCLWOOdpo2c8-Tzy0="
         class="card-img"
@@ -47,10 +47,10 @@ export default {
         <p class="card-text">TUTORBASED</p>
       </div>
     </div>
-    <h1>Here Are Some Of The Great Teachers</h1>
+    <h1>Here Are Some Of The Fantastic Tutors</h1>
     <input type="text" v-model="search" placeholder="Search by Subject" />
     <div v-for="user in filteredUsers" v-bind:key="user.id">
-      <div class="card" style="max-width: 540px">
+      <div class="card text-center" style="max-width: 540px">
         <img v-bind:src="user.image_url" class="card-img-top" alt="" />
         <div class="card-body">
           <h5 class="card-title">{{ user.name }}</h5>

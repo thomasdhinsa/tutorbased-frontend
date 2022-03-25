@@ -4,6 +4,9 @@ export default {
     return {
       isLoggedIn: !!localStorage.jwt,
       flashMessage: null,
+      // cssProps: {
+      //   backgroundImage: `url(${require("@/../../public/img/school.png")})`,
+      // },
     };
   },
   watch: {
@@ -37,7 +40,7 @@ export default {
             <a class="nav-link active" aria-current="page" href="/">Home</a>
           </li>
           <li class="nav-item">
-            <a v-if="isLoggedIn" class="nav-link" href="/signup">Signup</a>
+            <a v-if="!isLoggedIn" class="nav-link" href="/signup">Signup</a>
           </li>
           <li class="nav-item dropdown">
             <a
@@ -61,28 +64,17 @@ export default {
       </div>
     </div>
   </nav>
-  <router-view />
+  <div class="container">
+    <router-view />
+  </div>
 </template>
-
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+body {
+  background-image: url("/public/img/school.png");
 }
 
-nav {
-  padding: 30px;
-}
-
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-  color: #42b983;
+.card img {
+  object-fit: cover;
+  height: 500px;
 }
 </style>
